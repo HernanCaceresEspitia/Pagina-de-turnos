@@ -1,2 +1,0 @@
-//? Inicio de proyecto
-
