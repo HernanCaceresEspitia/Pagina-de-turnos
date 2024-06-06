@@ -45,7 +45,8 @@ export const cancelAppointmentService = async (
   const appointment: Appointment | null = await appointmentModel.findOneBy({
     id: turnId,
   });
-  if (!appointment) throw new Error("Turno inexistente");
+  if(appointment?.status === false) throw new Error ("Turno previamente cancelado.")
+  if (!appointment) throw new Error("Turno inexistente.");
   appointment.status = false;
   await appointmentModel.save(appointment);
 };
