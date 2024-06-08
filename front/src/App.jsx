@@ -1,15 +1,16 @@
-import Navbar from "./components/navbar/navbar";
-import Appointments from "./views/appointments/Appointments";
-// import Home from "./views/home/home";
+import Navbar from "./components/navbar/Navbars";
+// import Home from "./views/home/home"
+import Appointments from "./views/appointments/Appointment";
+import LoginForms from "./components/loginForm/LoginForms";
 
 function App() {
-
   return (
-    <>
-      <Navbar/>
+    <div>
+      <Navbar />
       {/* <Home/> */}
-      <Appointments/>
-    </>
+      <LoginForms />
+      <Appointments />
+    </div>
   );
 }
 

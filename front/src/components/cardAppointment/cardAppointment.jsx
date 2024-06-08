@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-
+import styles from "./cardAppointment.module.css"
 export default function CardAppointment({
   id,
   date,
@@ -17,8 +17,8 @@ export default function CardAppointment({
   };
 
   return (
-    <div>
-      <span>ID de Usuario: {id}</span>
+    <div className={styles.mainContainer}>
+      <span>ID de Turno: {id}</span>
       <br />
       <span>Fecha: {formatDate}</span>
       <br />
@@ -29,9 +29,9 @@ export default function CardAppointment({
       <span>
         Estado:{" "}
         {status === true ? (
-          <span onClick={handleClick}>Activo</span>
+          <span className={styles.active} onClick={handleClick}>Activo</span>
         ) : (
-          <span>Cancelado</span>
+          <span className={styles.cancelled}>Cancelado</span>
         )}
       </span>
     </div>

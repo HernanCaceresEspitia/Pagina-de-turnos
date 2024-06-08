@@ -5,12 +5,13 @@ import {
   getAppointmentById,
   scheduleAppointment,
 } from "../controllers/appointmentsControllers";
+import validateAppointmentMiddleware from "../middlewares/validateAppointment";
 
 const appointmentsRouter = Router();
 
 appointmentsRouter.get("/", getAllAppointments);
 appointmentsRouter.get("/:id", getAppointmentById);
-appointmentsRouter.post("/schedule", scheduleAppointment);
+appointmentsRouter.post("/schedule", validateAppointmentMiddleware, scheduleAppointment);
 appointmentsRouter.put("/cancel/:id", cancelAppointment);
 
 export default appointmentsRouter;

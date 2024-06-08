@@ -9,7 +9,7 @@ export default function Navbar() {
       </div>
       <div className={styles.linksSection}>
         <span>HOME</span>
-        <span>RESERVAR</span>
+        <span>INICIAR SESIÓN</span>
         <span>ACERCA DE</span>
         <span>CONTACTO</span>
       </div>
