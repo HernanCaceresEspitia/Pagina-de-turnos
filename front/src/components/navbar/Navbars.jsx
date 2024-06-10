@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import styles from "./navbar.module.css"
 
@@ -8,8 +9,8 @@ export default function Navbar() {
         <img src={logo} alt="logo"></img>
       </div>
       <div className={styles.linksSection}>
-        <span>HOME</span>
-        <span>INICIAR SESIÓN</span>
+        <Link to={"/home"}>HOME</Link>
+        <Link to={"/login"}>INICIAR SESIÓN</Link>
         <span>ACERCA DE</span>
         <span>CONTACTO</span>
       </div>

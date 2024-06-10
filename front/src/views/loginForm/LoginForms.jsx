@@ -1,7 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import validateUser from "../../helpers/validateUser";
+import axios from "axios";
 
 function LoginForms() {
+  const navigate = useNavigate();
+
   const [input, setInput] = useState({
     username: "",
     password: "",
@@ -17,23 +21,35 @@ function LoginForms() {
       ...input,
       [event.target.name]: event.target.value,
     });
-    setErrors(validateUser({
-      ...input,
-      [event.target.name]: event.target.value,
-    }));
+    setErrors(
+      validateUser({
+        ...input,
+        [event.target.name]: event.target.value,
+      })
+    );
   };
 
   console.log(errors);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    alert(
-      `Datos enviados, nombre de usuario: ${input.username}, contraseña: ${input.password}`
-    );
+    try {
+      const response = await axios.put("http://localhost:3000/users/login", {
+        username: input.username,
+        password: input.password,
+      });
+      alert(`Login exitoso: ${response.data.username}`);
+    } catch (error) {
+      console.error("Hubo un error al iniciar sesión", error);
+      alert(
+        `Error al iniciar sesión: ${error.response?.data || error.message}`
+      );
+    }
     setInput({
       username: "",
       password: "",
     });
+    navigate("/home");
   };
 
   return (
@@ -51,8 +67,9 @@ function LoginForms() {
             placeholder="Ingresa tu nombre de usuario"
             onChange={handleChange}
           />
-          <p style={{color: "coral", fontSize: "0.8em"}}>{ errors.username ? errors.username : null }</p>
-          
+          <p style={{ color: "coral", fontSize: "0.8em" }}>
+            {errors.username ? errors.username : null}
+          </p>
         </div>
         <div>
           <label htmlFor="password">Contraseña: </label>
@@ -64,9 +81,15 @@ function LoginForms() {
             placeholder="********"
             onChange={handleChange}
           />
-          <p style={{color: "coral", fontSize: "0.8em"}}>{ errors.password && errors.password }</p>
+          <p style={{ color: "coral", fontSize: "0.8em" }}>
+            {errors.password && errors.password}
+          </p>
         </div>
-        <input type="submit" value="Enviar" disabled={ errors.username || errors.password }/>
+        <input
+          type="submit"
+          value="Enviar"
+          disabled={errors.username || errors.password}
+        />
       </form>
     </div>
   );
