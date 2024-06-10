@@ -14,8 +14,6 @@ export default function CardAppointment({
 
   const formattedDate = new Date(date).toLocaleDateString();
 
-  date = new Date(date);
-
   const handleClick =  async (event) => {
     event.preventDefault();
     try {

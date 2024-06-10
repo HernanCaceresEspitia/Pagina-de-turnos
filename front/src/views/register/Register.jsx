@@ -1,8 +1,12 @@
 import { useState } from "react";
 import validateRegister from "../../helpers/validateRegister";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
+
+  const navigate = useNavigate();
+
   const [input, setInput] = useState({
     name: "",
     email: "",
@@ -50,6 +54,7 @@ function Register() {
         }
       );
       alert(`Registro exitoso. Bienvenido ${response.data.name}`);
+      navigate("/");
     } catch (error) {
       console.log("Error al registrarse", error);
       alert(`Error al registrarse: ${error.response?.data || error.message}`);

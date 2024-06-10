@@ -3,9 +3,14 @@ import { useNavigate } from "react-router-dom";
 import validateUser from "../../helpers/validateUser";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../../slices/userSlice";
 
 function LoginForms() {
+
   const navigate = useNavigate();
+  const dispacth = useDispatch();
+
 
   const [input, setInput] = useState({
     username: "",
@@ -39,7 +44,10 @@ function LoginForms() {
         username: input.username,
         password: input.password,
       });
-      alert(`Login exitoso: ${response.data.username}`);
+      alert(`Login exitoso: ${response.data.user.name}`);
+      dispacth(login({ id: response.data.user.id }));
+      console.log(response.data.user.id);
+      navigate("/");
     } catch (error) {
       console.error("Hubo un error al iniciar sesión", error);
       alert(

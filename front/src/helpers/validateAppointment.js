@@ -42,10 +42,6 @@ export default function validateAppointment(newAppointment) {
         }
     }
 
-    if (!newAppointment.userId) {
-        errors.userId = "Debe seleccionar un usuario";
-    }
-
     if (!newAppointment.description) {
         errors.description = "Debe dejar una descripción";
     }

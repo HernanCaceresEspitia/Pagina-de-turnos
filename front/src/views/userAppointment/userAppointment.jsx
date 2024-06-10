@@ -1,23 +1,29 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import CardAppointment from "../../components/cardAppointment/CardAppointment";
+import { useSelector } from "react-redux";
 
 export default function UserAppointments() {
   const [user, setUser] = useState({});
-  const { id } = useParams();
+  const id = useSelector((state) => state.user.id);
+  
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:3000/users/${id}`)
-      .then((response) => response.data)
-      .then((userAppointments) => setUser(userAppointments))
-      .catch((error) => console.error("Error fetching user appointments:", error));
-
-    return () => {
-      setUser({});
+    const fetchUserAppointments = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3000/users/${id}`);
+        setUser(response.data);
+      } catch (error) {
+        console.error("Error fetching user appointments:", error);
+      }
     };
-  }, [id]);
+
+    fetchUserAppointments();
+  }, [id]); 
+
+  if (!user) {
+    return <div>Loading...</div>;
+  }
 
   return (
    <div>

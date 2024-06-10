@@ -1,21 +1,23 @@
 import { useState } from "react";
 import validateAppointment from "../../helpers/validateAppointment";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 function CreateAppointment() {
   const [input, setInput] = useState({
     date: "",
     time: "",
-    userId: "",
     description: "",
   });
 
   const [errors, setErrors] = useState({
     date: "Debe ingresar una fecha",
     time: "Debe selccionar una hora",
-    userId: "Debe seleccionar el usuario",
     description: "Debe escribir una descripcion",
   });
+
+  const userId = useSelector((state) => state.user.id);
+  console.log(userId);
 
   const handleChange = (event) => {
     setInput({
@@ -41,7 +43,7 @@ function CreateAppointment() {
         {
           date: input.date,
           time: input.time,
-          userId: input.userId,
+          userId: userId,
           description: input.description,
         }
       );
@@ -55,7 +57,6 @@ function CreateAppointment() {
     setInput({
       date: "",
       time: "",
-      userId: "",
       description: "",
     });
   };
@@ -106,18 +107,6 @@ function CreateAppointment() {
             ))}
           </select>
             <p>{errors.time && errors.time}</p>
-
-        <div>
-            <label htmlFor="userId">ID de usuario</label>
-            <input
-                id="userId"
-                type="number"
-                name="userId"
-                value={input.userId}
-                placeholder="X"
-                onChange={handleChange}
-            />
-        </div>
         <div>
             <label htmlFor="description">Descripción:</label>
             <input
