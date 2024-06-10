@@ -2,8 +2,6 @@ import { useState } from "react";
 import validateRegister from "../../helpers/validateRegister";
 import axios from "axios";
 
-
-
 function Register() {
   const [input, setInput] = useState({
     name: "",
@@ -40,18 +38,21 @@ function Register() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3000/users/register", {
-        name:  input.name,
-        email: input.email,
-        dob:   input.dob,
-        nDni:  input.nDni,
-        username: input.username,
-        password: input.password,
-      });
-      alert(`Registro exitoso. Bienvenido ${response.data.name}`)
+      const response = await axios.post(
+        "http://localhost:3000/users/register",
+        {
+          name: input.name,
+          email: input.email,
+          dob: input.dob,
+          nDni: input.nDni,
+          username: input.username,
+          password: input.password,
+        }
+      );
+      alert(`Registro exitoso. Bienvenido ${response.data.name}`);
     } catch (error) {
       console.log("Error al registrarse", error);
-      alert(`Error al registrarse: ${error.response?.data || error.message}`)
+      alert(`Error al registrarse: ${error.response?.data || error.message}`);
     }
     setInput({
       name: "",

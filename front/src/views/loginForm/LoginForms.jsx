@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import validateUser from "../../helpers/validateUser";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function LoginForms() {
   const navigate = useNavigate();
@@ -91,6 +92,7 @@ function LoginForms() {
           disabled={errors.username || errors.password}
         />
       </form>
+      <p>¿No estás registrado? Has click <Link to={"/register"}>aquí</Link></p> 
     </div>
   );
 }
