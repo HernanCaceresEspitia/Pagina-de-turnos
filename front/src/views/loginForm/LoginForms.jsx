@@ -50,7 +50,7 @@ function LoginForms() {
       username: "",
       password: "",
     });
-    navigate("/home");
+    navigate("/");
   };
 
   return (

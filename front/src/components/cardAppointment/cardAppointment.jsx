@@ -1,26 +1,39 @@
 import PropTypes from "prop-types";
 import styles from "./cardAppointment.module.css"
+import axios from "axios";
+import { useState } from "react";
 export default function CardAppointment({
   id,
   date,
   time,
   description,
-  status,
+  initialStatus,
 }) {
-  date = new Date(date);
-  const formatDate = `${date.getDate()} / ${
-    date.getMonth() + 1
-  } / ${date.getFullYear()}`;
 
-  const handleClick = () => {
-    alert(`¿Desea cancelar el turno del día ${formatDate} a las ${time}?`);
+  const [status, setStatus] = useState(initialStatus);
+
+  const formattedDate = new Date(date).toLocaleDateString();
+
+  date = new Date(date);
+
+  const handleClick =  async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.put(`http://localhost:3000/appointments/cancel/${id}`);
+      setStatus(false)
+      alert(`Cancelación de turno: ${response.data.date} exitoso`);
+    } catch (error) {
+      console.error("Error al cancelar turno", error)
+      alert(`Error al cancelar turno: ${error.response?.data || error.message}`)
+    }
+    
   };
 
   return (
     <div className={styles.mainContainer}>
       <span>ID de Turno: {id}</span>
       <br />
-      <span>Fecha: {formatDate}</span>
+      <span>Fecha: {formattedDate}</span>
       <br />
       <span>Hora: {time}</span>
       <br />
@@ -28,7 +41,7 @@ export default function CardAppointment({
       <br />
       <span>
         Estado:{" "}
-        {status === true ? (
+        { status ? (
           <span className={styles.active} onClick={handleClick}>Activo</span>
         ) : (
           <span className={styles.cancelled}>Cancelado</span>
@@ -43,5 +56,5 @@ CardAppointment.propTypes = {
   date: PropTypes.string.isRequired,
   time: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  status: PropTypes.bool.isRequired,
+  initialStatus: PropTypes.bool.isRequired,
 };

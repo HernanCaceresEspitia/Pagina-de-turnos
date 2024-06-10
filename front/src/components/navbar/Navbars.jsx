@@ -1,16 +1,34 @@
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import styles from "./navbar.module.css"
+import { useState } from "react";
 
 export default function Navbar() {
+  
+  const [userLogged, setUserLogged] = useState(true);
+
+  const userId = 5;
+
+  const handleLogout = () => {
+    setUserLogged(false)
+  }
+  
   return (
     <div className={styles.navbarContainer}>
       <div className={styles.logoSection}>
         <img src={logo} alt="logo"></img>
       </div>
       <div className={styles.linksSection}>
-        <Link to={"/home"}>HOME</Link>
-        <Link to={"/login"}>INICIAR SESIÓN</Link>
+        <Link to={"/"}>HOME</Link>
+        { userLogged ? 
+        <div className={styles.linksSection}> 
+          <Link to={"/setAppointment"}>Pide un turno</Link>
+          <Link to={`/user/${userId}`}>Ver mis turnos</Link>
+          <Link to={"/"} onClick={handleLogout}>Cerrar Sesion</Link></div>
+          : 
+        <div>
+          <Link to={"/login"}>INICIAR SESIÓN</Link>
+        </div> }
         <span>ACERCA DE</span>
         <span>CONTACTO</span>
       </div>

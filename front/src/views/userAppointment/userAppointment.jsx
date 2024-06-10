@@ -30,7 +30,7 @@ export default function UserAppointments() {
             date={appointment.date}
             time={appointment.time}
             description={appointment.description}
-            status={appointment.status}
+            initialStatus={appointment.status}
           />
         ))
     ) : (
