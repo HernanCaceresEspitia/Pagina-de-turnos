@@ -80,7 +80,7 @@ export default function Navbar() {
           </div>
         )}
         <Link to={"/about"}>Acerca</Link>
-        <span>Contacto</span>
+        <Link to={"/contact"}>Contacto</Link>
       </div>
     </div>
   );

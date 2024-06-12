@@ -32,7 +32,7 @@ export default function UserAppointments() {
 
   return (
     <div className={styles.userAppointmentsContainer}>
-      <h1 className={styles.title}>Mis Turnos</h1>
+      <h1 className={styles.title}>Tus turnos</h1>
       <div className={styles.appointmentsGrid}>
         {sortedAppointments.length > 0 ? (
           sortedAppointments.map((appointment) => (

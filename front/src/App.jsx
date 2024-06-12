@@ -6,9 +6,10 @@ import LoginForms from "./views/loginForm/LoginForms";
 import Register from "./views/register/Register";
 import CreateAppointment from "./views/createAppointment/CreateAppointment";
 import UserAppointments from "./views/userAppointment/userAppointment";
-import NotFoundPage from "./views/notFoundPage/NotFoundPage";
+import NotFound from "./views/notFound/NotFound"
 import '@fortawesome/fontawesome-free/css/all.css';
 import About from "./views/about/About";
+import Contact from "./views/contact/Contact";
 
 
 function App() {
@@ -22,8 +23,9 @@ function App() {
         <Route path="/setAppointment" element={<CreateAppointment />} />
         <Route path="/register" element={<Register />} />
         <Route path="/user/:id" element={<UserAppointments />} />
+        <Route path="/contact" element={ <Contact/>} />
         <Route path="/about" element={<About/>} />
-        <Route path="*" element={<NotFoundPage />} />
+        <Route path="*" element={<NotFound/>} />
       </Routes>
     </div>
   );

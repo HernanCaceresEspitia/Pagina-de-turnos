@@ -1,0 +1,32 @@
+.contactContainer {
+    max-width: 800px;
+    margin: 14em auto;
+    padding: 2em;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .contactContainer h1 {
+    margin-bottom: 1em;
+    font-size: 2.5em;
+    color: #333;
+  }
+  
+  .contactContainer p {
+    font-size: 1.2em;
+    color: #666;
+  }
+  
+  .contactContainer ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .contactContainer ul li {
+    font-size: 1.1em;
+    margin-bottom: 0.5em;
+  }
+  
+  

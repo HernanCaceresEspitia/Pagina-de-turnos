@@ -15,6 +15,9 @@ export default function About() {
       <p className={styles.description}>
         Si tienes alguna pregunta o deseas hacer un pedido personalizado, no dudes en ponerte en contacto con nosotros. Estamos aquí para ayudarte a crear el muñeco perfecto para ti o tus seres queridos.
       </p>
+      <p className={styles.description}>
+        En honor a mi querida hermana Angélica
+      </p>
     </div>
   );
 }
