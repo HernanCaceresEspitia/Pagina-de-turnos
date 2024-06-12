@@ -39,6 +39,9 @@ export default function validateRegister(newUser) {
     if (!nDniRegex.test(newUser.nDni)) {
       errors.nDni = "El número de identificación debe contener solo números";
     }
+    if(newUser.nDni >= 2147483647 || newUser.nDni < 0) {
+      errors.nDni = "El número escogido no es válido"
+    }
   }
 
   if (!newUser.username) {
