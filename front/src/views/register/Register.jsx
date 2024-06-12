@@ -54,11 +54,10 @@ function Register() {
           password: input.password,
         }
       );
-      alert(`Registro exitoso. Bienvenido ${response.data.name}`);
-      navigate("/login");
+      navigate("/login", { state: { message: `¡Registro exitoso!. Bienvenido ${response.data.name}` } });
     } catch (error) {
       console.log("Error al registrarse", error);
-      alert(`Error al registrarse: ${error.response?.data || error.message}`);
+      alert(`Error al registrarse: ${error.response?.data.message || error.message}`);
     }
     setInput({
       name: "",

@@ -63,20 +63,16 @@ export default function CardAppointment({
     <div className={styles.card}>
       <div className={styles.cardContent}>
         <span><p>Fecha:</p> <p>{formattedDate}</p></span>
-        <br />
-        <span>Hora: {time}</span>
-        <br />
-        <span>Descripción: {description}</span>
-        <br />
+        <span><p>Hora:</p> <p>{time}</p></span>
+        <span><p>Descripción:</p> <p>{description}</p></span>
         <span>
-          Estado:{" "}
+          <p>Estado:</p> 
           {status ? (
             <span className={styles.active}>Activo</span>
           ) : (
             <span className={styles.cancelled}>Cancelado</span>
           )}
         </span>
-        <br />
         {status ? (
           <span className={styles.cancelButton} onClick={handleClick}>Cancelar turno</span>
         ) : null}

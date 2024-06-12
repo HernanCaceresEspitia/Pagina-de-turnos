@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import styles from "./navbar.module.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 
 export default function Navbar() {
   const dispacth = useDispatch();
+  const navigate = useNavigate();
   const userLogged = useSelector((state) => state.user.isLoggedIn);
   const userId = useSelector((state) => state.user.id);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -28,6 +29,8 @@ export default function Navbar() {
           text: "Ha cerrado sesión exitosamente.",
           icon: "success",
           confirmButtonText: "Aceptar",
+        }).then(() => {
+          navigate("/");
         });
       } else {
         Swal.fire({
@@ -63,7 +66,6 @@ export default function Navbar() {
             <Link to={"/setAppointment"}>Pide un turno</Link>
             <Link to={`/user/${userId}`}>Ver mis turnos</Link>
             <Link
-              to={"/"}
               onClick={handleLogout}
               className={styles.loginButton}
             >
@@ -77,7 +79,7 @@ export default function Navbar() {
             </Link>
           </div>
         )}
-        <span>Acerca</span>
+        <Link to={"/about"}>Acerca</Link>
         <span>Contacto</span>
       </div>
     </div>

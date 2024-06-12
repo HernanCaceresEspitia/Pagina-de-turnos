@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import validateUser from "../../helpers/validateUser";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -12,6 +12,24 @@ import "react-toastify/dist/ReactToastify.css";
 function LoginForms() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state?.message) {
+      toast.success(location.state.message, {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Flip,
+      });
+    }
+  }, [location.state]);
+
   const notify = () => {
     toast.error('Usuario o contraseña incorrectos', {
       position: "top-center",

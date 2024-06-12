@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import CardAppointment from "../../components/cardAppointment/CardAppointment";
 import { useSelector } from "react-redux";
 import styles from './userAppointment.module.css'
+import { Link } from "react-router-dom";
 
 
 
@@ -45,7 +46,7 @@ export default function UserAppointments() {
             />
           ))
         ) : (
-          <p className={styles.loading}>Aun no tienes turnos asiganos. ¡Crea uno aquí!</p>
+          <p className={styles.loading}>Aun no tienes turnos asiganos. ¡Crea uno <Link to={"/setAppointment"}>aquí!</Link></p>
         )}
       </div>
     </div>

@@ -8,6 +8,7 @@ import CreateAppointment from "./views/createAppointment/CreateAppointment";
 import UserAppointments from "./views/userAppointment/userAppointment";
 import NotFoundPage from "./views/notFoundPage/NotFoundPage";
 import '@fortawesome/fontawesome-free/css/all.css';
+import About from "./views/about/About";
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route path="/setAppointment" element={<CreateAppointment />} />
         <Route path="/register" element={<Register />} />
         <Route path="/user/:id" element={<UserAppointments />} />
+        <Route path="/about" element={<About/>} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>

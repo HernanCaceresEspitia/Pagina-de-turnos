@@ -1,34 +1,62 @@
 .card {
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    padding: 20px;
-    width: 15em;
-    margin: 1.5em;
-    box-shadow: 0 4px 8px rgba(11, 79, 108, 0.1);
-    transition: box-shadow 0.3s ease;
-  }
-  
-  .card:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  }
-  
-  .cardContent {
-    margin-bottom: 20px;
-    display: grid;
-  }
-  
-  .active {
-    color: green;
-    font-weight: bold;
-  }
-  
-  .cancelled {
-    color: red;
-    font-weight: bold;
-  }
-  
-  .cancelButton {
-    color: blue;
-    cursor: pointer;
-  }
+  background-color: rgba(20, 92, 158, 0.9);
+  color: #DCC7BE;
+  border-radius: 15px;
+  padding: 20px;
+  width: 250px;
+  margin: 1.5em auto;
+  box-shadow: 0 4px 8px rgba(11, 79, 108, 0.1);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  font-family: 'Arial', sans-serif;;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
+}
+
+.cardContent {
+  margin-bottom: 20px;
+  display: grid;
+  gap: 10px;
+}
+
+.cardContent span {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cardContent p {
+  margin: 0;
+}
+
+.active {
+  color: #28a745;
+  font-weight: bold;
+}
+
+.cancelled {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+.cancelButton {
+  color: #DCC7BE;
+  background-color: #0B4F6C;
+  cursor: pointer;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px 15px;
+  border: 2px solid #0B4F6C;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.cancelButton:hover {
+  background-color: #145C9E;
+  border-color: #145C9E;
+  color:#DCC7BE;
+}
+
   

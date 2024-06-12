@@ -16,7 +16,7 @@
 .appointmentsGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 1.5em;
+  gap: 2.5em;
   padding: 1em;
 }
 
