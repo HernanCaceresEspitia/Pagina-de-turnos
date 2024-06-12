@@ -2,11 +2,13 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import CardAppointment from "../../components/cardAppointment/CardAppointment";
 import { useSelector } from "react-redux";
+import styles from './userAppointment.module.css'
+
+
 
 export default function UserAppointments() {
   const [user, setUser] = useState({});
   const id = useSelector((state) => state.user.id);
-  
 
   useEffect(() => {
     const fetchUserAppointments = async () => {
@@ -25,23 +27,27 @@ export default function UserAppointments() {
     return <div>Loading...</div>;
   }
 
+  const sortedAppointments = user.appointments ? [...user.appointments].sort((a, b) => new Date(a.date) - new Date(b.date)) : [];
+
   return (
-   <div>
-    <h1>Mis Turnos</h1>
-    {user.appointments ? (
-        user.appointments.map((appointment) => (
+    <div className={styles.userAppointmentsContainer}>
+      <h1 className={styles.title}>Mis Turnos</h1>
+      <div className={styles.appointmentsGrid}>
+        {sortedAppointments.length > 0 ? (
+          sortedAppointments.map((appointment) => (
             <CardAppointment
-            key={appointment.id}
-            id={appointment.id}
-            date={appointment.date}
-            time={appointment.time}
-            description={appointment.description}
-            initialStatus={appointment.status}
-          />
-        ))
-    ) : (
-        <p>Cargando turnos...</p>
-    )}
-   </div>
+              key={appointment.id}
+              id={appointment.id}
+              date={appointment.date}
+              time={appointment.time}
+              description={appointment.description}
+              initialStatus={appointment.status}
+            />
+          ))
+        ) : (
+          <p className={styles.loading}>Aun no tienes turnos asiganos. ¡Crea uno aquí!</p>
+        )}
+      </div>
+    </div>
   );
 }

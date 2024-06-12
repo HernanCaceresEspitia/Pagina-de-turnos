@@ -1,0 +1,12 @@
+.homeContainer {
+    position: absolute;
+    margin-top: 5em;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .title {
+    font-family: "Arial Black", sans-serif; /* Otra fuente más llamativa */
+    font-size: 2.5em; /* Tamaño más grande */
+    text-align: center; /* Centrar el texto */
+  }

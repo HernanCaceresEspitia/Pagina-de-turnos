@@ -5,13 +5,27 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../../slices/userSlice";
+import styles from "./LoginForms.module.css";
+import { ToastContainer, toast, Flip } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function LoginForms() {
-
   const navigate = useNavigate();
-  const dispacth = useDispatch();
-
-
+  const dispatch = useDispatch();
+  const notify = () => {
+    toast.error('Usuario o contraseña incorrectos', {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Flip,
+      });
+  }
+  
   const [input, setInput] = useState({
     username: "",
     password: "",
@@ -44,30 +58,30 @@ function LoginForms() {
         username: input.username,
         password: input.password,
       });
-      alert(`Login exitoso: ${response.data.user.name}`);
-      dispacth(login({ id: response.data.user.id }));
-      console.log(response.data.user.id);
+      const userName = response.data.user.name;
+      dispatch(login({ id: response.data.user.id, name: userName, notification: `Bienvenido ${userName}` }));
       navigate("/");
     } catch (error) {
       console.error("Hubo un error al iniciar sesión", error);
-      alert(
-        `Error al iniciar sesión: ${error.response?.data || error.message}`
-      );
+      notify();
+      navigate("/login");
     }
     setInput({
       username: "",
       password: "",
     });
-    navigate("/");
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-      <hr />
+    <div className={styles.loginContainer}>
+      <ToastContainer />
+      <h1 className={styles.loginTitle}>Iniciar Sesión</h1>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">Nombre de usuario: </label>
+        <div className={styles.formGroup}>
+          {" "}
+          <label htmlFor="username" className={styles.formLabel}>
+            Nombre de usuario:{" "}
+          </label>{" "}
           <input
             id="username"
             type="text"
@@ -75,13 +89,16 @@ function LoginForms() {
             value={input.username}
             placeholder="Ingresa tu nombre de usuario"
             onChange={handleChange}
+            className={styles.formInput}
           />
-          <p style={{ color: "coral", fontSize: "0.8em" }}>
-            {errors.username ? errors.username : null}
+          <p className={styles.errorMessage}>
+            {errors.username && errors.username}{" "}
           </p>
         </div>
-        <div>
-          <label htmlFor="password">Contraseña: </label>
+        <div className={styles.formGroup}>
+          <label htmlFor="password" className={styles.formLabel}>
+            Contraseña:{" "}
+          </label>
           <input
             id="password"
             type="password"
@@ -89,18 +106,26 @@ function LoginForms() {
             value={input.password}
             placeholder="********"
             onChange={handleChange}
+            className={styles.formInput}
           />
-          <p style={{ color: "coral", fontSize: "0.8em" }}>
+          <p className={styles.errorMessage}>
             {errors.password && errors.password}
           </p>
         </div>
         <input
+          id="Enviar"
           type="submit"
           value="Enviar"
           disabled={errors.username || errors.password}
+          className={styles.submitButton}
         />
       </form>
-      <p>¿No estás registrado? Has click <Link to={"/register"}>aquí</Link></p> 
+      <p>
+        ¿No estás registrado? Has click{" "}
+        <Link to={"/register"} className={styles.linkText}>
+          aquí
+        </Link>
+      </p>
     </div>
   );
 }

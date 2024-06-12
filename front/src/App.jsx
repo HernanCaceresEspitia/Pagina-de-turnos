@@ -7,6 +7,8 @@ import Register from "./views/register/Register";
 import CreateAppointment from "./views/createAppointment/CreateAppointment";
 import UserAppointments from "./views/userAppointment/userAppointment";
 import NotFoundPage from "./views/notFoundPage/NotFoundPage";
+import '@fortawesome/fontawesome-free/css/all.css';
+
 
 function App() {
   return (

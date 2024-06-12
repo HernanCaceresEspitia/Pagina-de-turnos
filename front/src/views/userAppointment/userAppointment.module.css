@@ -1,0 +1,28 @@
+/* Estilo para el contenedor principal */
+.userAppointmentsContainer {
+  padding: 2em;
+  margin-top: 4em;
+}
+
+/* Estilo para el título */
+.title {
+  text-align: center;
+  margin-bottom: 1.5em;
+  font-size: 2em;
+  color: #333;
+}
+
+/* Estilo para el contenedor de la rejilla de citas */
+.appointmentsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5em;
+  padding: 1em;
+}
+
+/* Estilo para el mensaje de carga */
+.loading {
+  text-align: center;
+  font-size: 1.2em;
+  color: #666;
+}

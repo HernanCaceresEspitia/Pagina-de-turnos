@@ -2,6 +2,8 @@ import PropTypes from "prop-types";
 import styles from "./cardAppointment.module.css"
 import axios from "axios";
 import { useState } from "react";
+import Swal from 'sweetalert2'
+
 export default function CardAppointment({
   id,
   date,
@@ -16,35 +18,69 @@ export default function CardAppointment({
 
   const handleClick =  async (event) => {
     event.preventDefault();
-    try {
-      const response = await axios.put(`http://localhost:3000/appointments/cancel/${id}`);
-      setStatus(false)
-      alert(`Cancelación de turno: ${response.data.date} exitoso`);
-    } catch (error) {
-      console.error("Error al cancelar turno", error)
-      alert(`Error al cancelar turno: ${error.response?.data || error.message}`)
+
+    const result = await Swal.fire({
+      title: '¿Está seguro? ',
+      text: 'Esta acción no se puede revertir',
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: 'Si, cancelar turno',
+      cancelButtonText: 'No, mantener turno'
+    });
+    if (result.isConfirmed) {
+      try {
+        const response = await axios.put(`http://localhost:3000/appointments/cancel/${id}`);
+        setStatus(false);
+        Swal.fire({
+          title: '¡Cancelado!',
+          text: 'Tu turno ha sido cancelado.',
+          icon: 'success',
+          confirmButtonText: 'Aceptar'
+        });
+        console.log(response);
+      } catch (error) {
+        console.error("Error al cancelar turno", error);
+        Swal.fire({
+          title: 'Error!',
+          text: `Error al cancelar turno: ${error.response?.data || error.message}`,
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        });
+      }
+    } else {
+      // Si el usuario decide no cancelar el turno
+      Swal.fire({
+        title: 'Cancelación abortada',
+        text: 'Tu turno está seguro.',
+        icon: 'info',
+        confirmButtonText: 'Aceptar'
+      });
     }
     
   };
 
   return (
-    <div className={styles.mainContainer}>
-      <span>ID de Turno: {id}</span>
-      <br />
-      <span>Fecha: {formattedDate}</span>
-      <br />
-      <span>Hora: {time}</span>
-      <br />
-      <span>Descripción :{description}</span>
-      <br />
-      <span>
-        Estado:{" "}
-        { status ? (
-          <span className={styles.active} onClick={handleClick}>Activo</span>
-        ) : (
-          <span className={styles.cancelled}>Cancelado</span>
-        )}
-      </span>
+    <div className={styles.card}>
+      <div className={styles.cardContent}>
+        <span><p>Fecha:</p> <p>{formattedDate}</p></span>
+        <br />
+        <span>Hora: {time}</span>
+        <br />
+        <span>Descripción: {description}</span>
+        <br />
+        <span>
+          Estado:{" "}
+          {status ? (
+            <span className={styles.active}>Activo</span>
+          ) : (
+            <span className={styles.cancelled}>Cancelado</span>
+          )}
+        </span>
+        <br />
+        {status ? (
+          <span className={styles.cancelButton} onClick={handleClick}>Cancelar turno</span>
+        ) : null}
+      </div>
     </div>
   );
 }

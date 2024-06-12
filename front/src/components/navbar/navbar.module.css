@@ -1,32 +1,120 @@
 .navbarContainer {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
-  background-color: #8e94f2;
-  color: #dab6fc;
-  padding-bottom: 1em;
   align-items: center;
+  background: rgba(203, 185, 168, 0.7);
+  backdrop-filter: blur(10px);
+  color: #1F271B;
+  padding: 10px 20px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
 }
 
 .logoSection {
   display: flex;
-  flex-direction: row;
-  img {
-    height: 100px;
-    padding: 20px 0 0 20px;
-  }
+  align-items: center;
+}
+
+.logoImage {
+  height: 50px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.logoImage:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+}
+
+.menuToggle {
+  display: none;
+  font-size: 1.5em;
+  cursor: pointer;
+  color: #fff;
 }
 
 .linksSection {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    margin-right: 20px;
-    gap: 1.5em;
-    font-size: 1.2em;
-    text-shadow: 2px 2px 4px black;
-    span:hover {
-        color: #9FA0FF;
-        cursor: pointer;
-    }
+  display: flex;
+  align-items: center;
+  gap: 1.5em;
+  margin-right: 2em;
 }
+
+.linksSection a,
+.linksSection span {
+  color: #1F271B;
+  text-decoration: none;
+  font-size: 1.2em;
+  position: relative;
+}
+
+.linksSection a:hover,
+.linksSection span:hover {
+  color: #0B4F6C;
+}
+
+.linksSection a::before,
+.linksSection span::before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: #9EA2A6;
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.linksSection a:hover::before,
+.linksSection span:hover::before {
+  visibility: visible;
+  width: 100%;
+}
+
+.loginButton {
+  background-color: #CBB9A8;
+  color: white;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.loginButton:hover {
+  background-color: #DCC7BE;
+}
+
+@media (max-width: 768px) {
+  .menuToggle {
+    display: block;
+  }
+
+  .linksSection {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background-color: rgba(136, 149, 179, 0.9);
+    position: absolute;
+    top: 60px;
+    left: 0;
+    z-index: 999;
+    padding: 20px;
+  }
+
+  .linksSection.menuOpen {
+    display: flex;
+  }
+
+  .linksSection a,
+  .linksSection span {
+    margin: 10px 0;
+  }
+
+  .logoSection {
+    flex: 1;
+  }
+}
+

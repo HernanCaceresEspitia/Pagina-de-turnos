@@ -1,0 +1,66 @@
+.loginContainer {
+    max-width: 400px;
+    margin: 7em auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #B5AEA7;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .loginTitle {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333333;
+  }
+  
+  .formGroup {
+    margin-bottom: 20px;
+  }
+  
+  .formLabel {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: #333333;
+  }
+  
+  .formInput {
+    width: 95%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #DCC7BE;
+    border-radius: 5px;
+  }
+  
+  .errorMessage {
+    color: #ff0000;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  
+  .submitButton {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #708BA3;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submitButton:hover {
+    background-color: #0B4F6C;
+  }
+  
+  .linkText {
+    font-size: 14px;
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .linkText:hover {
+    text-decoration: underline;
+  }

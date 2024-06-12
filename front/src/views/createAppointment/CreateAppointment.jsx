@@ -1,7 +1,10 @@
 import { useState } from "react";
 import validateAppointment from "../../helpers/validateAppointment";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import styles from "./CreateAppointment.module.css";
+import Swal from "sweetalert2";
 
 function CreateAppointment() {
   const [input, setInput] = useState({
@@ -16,8 +19,8 @@ function CreateAppointment() {
     description: "Debe escribir una descripcion",
   });
 
+  const navigate = useNavigate();
   const userId = useSelector((state) => state.user.id);
-  console.log(userId);
 
   const handleChange = (event) => {
     setInput({
@@ -38,21 +41,28 @@ function CreateAppointment() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post(
-        "http://localhost:3000/appointments/schedule",
-        {
-          date: input.date,
+      const response = await axios.post("http://localhost:3000/appointments/schedule", {
+        date: input.date,
           time: input.time,
           userId: userId,
           description: input.description,
-        }
-      );
-      alert(`Turno asignado exitosamente ${response.data.id}`);
+      }
+    );
+    Swal.fire({
+      title: 'Turno asignado exitosamente',
+        text: `Turno ID: ${response.data.id}`,
+        icon: 'success',
+        confirmButtonText: 'Aceptar'
+    });
+    navigate(`/user/${userId}`);
     } catch (error) {
       console.error("Error al crear el turno", error);
-      alert(
-        `Error al crear el turno: ${error.response?.data || error.message}`
-      );
+      Swal.fire({
+        title: 'Error al crear el turno',
+        text: `${error.response?.data || error.message}`,
+        icon: 'error',
+        confirmButtonText: 'Aceptar'
+      });
     }
     setInput({
       date: "",
@@ -75,11 +85,11 @@ function CreateAppointment() {
     Object.values(input).some((field) => field === "");
 
   return (
-    <div>
-      <h1>Asigna tu turno</h1>
+    <div className={styles.createAppointmentContainer}>
+      <h1 className={styles.title}>Asigna tu turno</h1>
       <hr />
-      <form onSubmit={handleSubmit}>
-        <div>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <div className={styles.inputGroup}>
           <label htmlFor="date">Fecha:</label>
           <input
             id="date"
@@ -88,16 +98,18 @@ function CreateAppointment() {
             value={input.date}
             placeholder="01/01/2024"
             onChange={handleChange}
+            className={styles.input}
           />
-          <p>{errors.date && errors.date}</p>
+          <p className={styles.error}>{errors.date && errors.date}</p>
         </div>
-        <div>
+        <div className={styles.inputGroup}>
           <label htmlFor="time">Hora:</label>
           <select
             id="time"
             name="time"
             value={input.time}
             onChange={handleChange}
+            className={styles.input}
           >
             <option value="">Selecciona una hora:</option>
             {generateTimeOptions().map((time) => (
@@ -106,21 +118,29 @@ function CreateAppointment() {
               </option>
             ))}
           </select>
-            <p>{errors.time && errors.time}</p>
-        <div>
-            <label htmlFor="description">Descripción:</label>
-            <input
-                id="description"
-                type="text"
-                name="description"
-                value={input.description}
-                placeholder="Quiero mi muñeco con pantalones rosa"
-                onChange={handleChange}
-            />
-            <p>{ errors.description && errors.description }</p>
+          <p className={styles.error}>{errors.time && errors.time}</p>
         </div>
-        <input type="submit" value="Enviar" disabled = {isDisabled}/>
+        <div className={styles.inputGroup}>
+          <label htmlFor="description">Descripción:</label>
+          <input
+            id="description"
+            type="text"
+            name="description"
+            value={input.description}
+            placeholder="Quiero mi muñeco con pantalones rosa"
+            onChange={handleChange}
+            className={styles.input}
+          />
+          <p className={styles.error}>
+            {errors.description && errors.description}
+          </p>
         </div>
+        <input
+          type="submit"
+          value="Enviar"
+          disabled={isDisabled}
+          className={styles.submitButton}
+        />
       </form>
     </div>
   );

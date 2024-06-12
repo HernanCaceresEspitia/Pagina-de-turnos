@@ -2,6 +2,7 @@ import { useState } from "react";
 import validateRegister from "../../helpers/validateRegister";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import styles from "./Register.module.css"
 
 function Register() {
 
@@ -54,7 +55,7 @@ function Register() {
         }
       );
       alert(`Registro exitoso. Bienvenido ${response.data.name}`);
-      navigate("/");
+      navigate("/login");
     } catch (error) {
       console.log("Error al registrarse", error);
       alert(`Error al registrarse: ${error.response?.data || error.message}`);
@@ -74,12 +75,13 @@ function Register() {
     Object.values(input).some((field) => field === "");
 
   return (
-    <div>
-      <h1>Registro</h1>
-      <hr />
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="name">Nombre de usuario</label>
+    <div className={styles.registerContainer}>
+      <h1 className={styles.registerTitle}>¡Regístrate!</h1>
+      <form onSubmit={handleSubmit} className={styles.registerForm}>
+        <div className="formGroup">
+          <label htmlFor="name" className={styles.formLabel}>
+            Nombre de usuario
+          </label>
           <input
             id="name"
             type="text"
@@ -87,11 +89,14 @@ function Register() {
             value={input.name}
             placeholder="Primer nombre y apellido"
             onChange={handleChange}
+            className={styles.formInput}
           />
-          <p>{errors.name && errors.name}</p>
+          <p className={styles.errorMessage}>{errors.name && errors.name}</p>
         </div>
-        <div>
-          <label htmlFor="email">Correo electrónico</label>
+        <div className={styles.formGroup}>
+          <label htmlFor="email" className={styles.formLabel}>
+            Correo electrónico
+          </label>
           <input
             id="email"
             type="text"
@@ -99,11 +104,14 @@ function Register() {
             value={input.email}
             placeholder="example@mail.com"
             onChange={handleChange}
+            className={styles.formInput}
           />
-          <p>{errors.email && errors.email}</p>
+          <p className={styles.errorMessage}>{errors.email && errors.email}</p>
         </div>
-        <div>
-          <label htmlFor="dob">Fecha de nacimiento</label>
+        <div className={styles.formGroup}>
+          <label htmlFor="dob" className={styles.formLabel}>
+            Fecha de nacimiento
+          </label>
           <input
             id="dob"
             type="date"
@@ -111,11 +119,14 @@ function Register() {
             value={input.dob}
             placeholder="01/01/2000"
             onChange={handleChange}
+            className={styles.formInput}
           />
-          <p>{errors.dob && errors.dob}</p>
+          <p className={styles.errorMessage}>{errors.dob && errors.dob}</p>
         </div>
-        <div>
-          <label htmlFor="nDni">Número de identificación</label>
+        <div className={styles.formGroup}>
+          <label htmlFor="nDni" className={styles.formLabel}>
+            Número de identificación
+          </label>
           <input
             id="nDni"
             type="text"
@@ -123,11 +134,14 @@ function Register() {
             value={input.nDni}
             placeholder="XXX-XXX-XXX-XX"
             onChange={handleChange}
+            className={styles.formInput}
           />
-          <p>{errors.nDni && errors.nDni}</p>
+          <p className={styles.errorMessage}>{errors.nDni && errors.nDni}</p>
         </div>
-        <div>
-          <label htmlFor="username">Nombre de usuario</label>
+        <div className="formGroup">
+          <label htmlFor="username" className={styles.formLabel}>
+            Nombre de usuario
+          </label>
           <input
             id="username"
             type="text"
@@ -135,11 +149,14 @@ function Register() {
             value={input.username}
             placeholder="Pepito1"
             onChange={handleChange}
+            className={styles.formInput}
           />
-          <p>{errors.username && errors.username}</p>
+          <p className={styles.errorMessage}>{errors.username && errors.username}</p>
         </div>
-        <div>
-          <label htmlFor="password">Contraseña</label>
+        <div className="formGroup">
+          <label htmlFor="password" className={styles.formLabel}>
+            Contraseña
+          </label>
           <input
             id="password"
             name="password"
@@ -147,11 +164,16 @@ function Register() {
             value={input.password}
             placeholder="*******"
             onChange={handleChange}
+            className={styles.formInput}
           />
-          <p>{errors.password && errors.password}</p>
+          <p className={styles.errorMessage}>{errors.password && errors.password}</p>
         </div>
-
-        <input type="submit" value="Enviar" disabled={isDisabled} />
+        <input
+          type="submit"
+          value="Enviar"
+          disabled={isDisabled}
+          className={styles.submitButton}
+        />
       </form>
     </div>
   );

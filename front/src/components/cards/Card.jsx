@@ -8,7 +8,7 @@ export default function Card({
 }) {
   return (
     <div className={styles.cardContainer}>
-      <img src={productImg} alt="Product sample" />
+      <img src={productImg} alt="Product sample" className={styles.productImg} />
       <div className={styles.textArea}>
         <h4>{productTitle}</h4>
         <p>{description}</p>
@@ -22,3 +22,4 @@ Card.propTypes = {
   productTitle: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
 }
+
